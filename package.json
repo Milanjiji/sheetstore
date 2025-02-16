@@ -1,0 +1,30 @@
+{
+  "name": "sheetstore",
+  "version": "1.0.0",
+  "description": "An alternative for firebase firestore using google sheets",
+  "main": "index.js",
+  "module": "dist/esm/index.js", 
+  "files": ["dist"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Milanjiji/sheetstore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Milanjiji/sheetstore/issues"
+  },
+  "homepage": "https://github.com/Milanjiji/sheetstore#readme",
+  "devDependencies": {
+    "@babel/core": "^7.26.9",
+    "@babel/preset-env": "^7.26.9",
+    "rollup": "^2.79.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  }
+}
