@@ -2,9 +2,10 @@
   "name": "sheetstore",
   "version": "1.0.0",
   "description": "An alternative for firebase firestore using google sheets",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
+  "type": "module",
   "files": [
     "dist"
   ],

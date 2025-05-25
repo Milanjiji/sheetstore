@@ -5,8 +5,8 @@ import copy from 'rollup-plugin-copy';
 export default {
   input: 'src/index.js',
   output: [
-    { file: 'dist/cjs/index.js', format: 'cjs' }, // CommonJS for Node.js
-    { file: 'dist/esm/index.js', format: 'esm' }  // ES Modules for browsers
+    { file: 'dist/cjs/index.js', format: 'cjs' }, 
+    { file: 'dist/esm/index.js', format: 'esm' } 
   ],
   plugins: [
     resolve(),
@@ -15,5 +15,5 @@ export default {
       targets: [{ src: 'types/**/*', dest: 'dist/types' }]
     })
   ],
-  external: [] // Add external deps if needed (e.g., 'axios')
+  external: []
 };
