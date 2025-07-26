@@ -4,7 +4,7 @@ const GetRowIndexWithId = async (sheetId,sheetName,docId) =>{
     "sheetName":sheetName,
     "docId":docId
   }
-  const response = await fetch('/api/sheets/getWithId', {
+  const response = await fetch('https://spock-mauve.vercel.app/api/sheets/getWithId', {
       method: 'POST',
       headers:{
         'Content-Type': 'application/json'
@@ -23,41 +23,38 @@ const GetRowIndexWithId = async (sheetId,sheetName,docId) =>{
     }
 }
 
-export const getDocs = async (sheetId,sheetName) =>{
+export const getDocs = async (sheetId,sheetName) => {
   const getData = {
-    "sheetId":sheetId,
-    "sheetName":sheetName
+    "sheetId": sheetId,
+    "sheetName": sheetName
   }
 
   console.log("fething data");
-  const response = await fetch('/api/sheets/get', {
-    
-      method: 'POST',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      body:JSON.stringify(getData)
-    });
+  const response = await fetch('https://spock-mauve.vercel.app/api/sheets/get', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(getData)
+  });
   
-    if (response.ok) {
-      const result  = await response.json()
+  if (response.ok) {
+    const result  = await response.json()
 
-
-      var data = []
-      result.data.forEach((row,index) => {
-        
-        var newData = {}
-        row.forEach((row,index) =>{
-          const [key,acc] = row.split(':')
-          newData[key] = acc
-        })
-        data[index] = newData;
+    var data = []
+    result.data.forEach((row, index) => {
+      var newData = {}
+      row.forEach((row, index) => {
+        const [key, acc] = row.split(':')
+        newData[key] = acc
       })
+      data[index] = newData;
+    })
 
-      return data
-    } else {
-      return undefined
-    }
+    return data
+  } else {
+    return undefined
+  }
 }
 
 export const getDoc = async (sheetId, sheetName, docId) => {
@@ -66,7 +63,7 @@ export const getDoc = async (sheetId, sheetName, docId) => {
     "sheetName":sheetName,
     "docId":docId
   }
-  const response = await fetch('/api/sheets/getWithId', {
+  const response = await fetch('https://spock-mauve.vercel.app/api/sheets/getWithId', {
       method: 'POST',
       headers:{
         'Content-Type': 'application/json'
@@ -117,7 +114,7 @@ export const addDoc = async (sheetId, sheetName, values) => {
     sheetId: sheetId,
   };
 
-  const response = await fetch('/api/sheets/add', {
+  const response = await fetch('https://spock-mauve.vercel.app/api/sheets/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -125,7 +122,7 @@ export const addDoc = async (sheetId, sheetName, values) => {
     body: JSON.stringify(postData),
   });
 
-  return response;
+  return response.ok;
 };
 
 export const updateDoc = async (sheetId,sheetName,docId,update) =>{
@@ -144,7 +141,7 @@ export const updateDoc = async (sheetId,sheetName,docId,update) =>{
   const transformedValues = [[...Object.entries(data).map(([key, value]) => `${key}:${value}`)]];
   const Range = `${sheetName}!A${lastRowNo.index + 1}:${numbertoString}${lastRowNo.index + 1}`;
 
-  console.log(lastRowNo.index,Object.keys(data).length,transformedValues,Range,"data from setDoc")
+  // console.log(lastRowNo.index,Object.keys(data).length,transformedValues,Range,"data from setDoc")
 
   const postData = {
     values: transformedValues,
@@ -152,7 +149,7 @@ export const updateDoc = async (sheetId,sheetName,docId,update) =>{
     sheetId: sheetId,
   };
 
-  const response = await fetch('/api/sheets/add', {
+  const response = await fetch('https://spock-mauve.vercel.app/api/sheets/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -160,7 +157,7 @@ export const updateDoc = async (sheetId,sheetName,docId,update) =>{
     body: JSON.stringify(postData),
   });
 
-  return response;
+  return response.ok;
 
 }
 
@@ -172,7 +169,7 @@ export const setDoc = async (sheetId,sheetName,docId,update) =>{
   const rowNumber = lastRowNo.index + 1;
 
   const clearRange = `${sheetName}!A${rowNumber}:Z${rowNumber}`;
-  const resultFromClear = await fetch('/api/sheets/clear', {
+  const resultFromClear = await fetch('https://spock-mauve.vercel.app/api/sheets/clear', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -226,7 +223,7 @@ export const deleteDoc = async (sheetId,sheetName,docId) =>{
     index:RowNo.index+1
   };
 
-  const response = await fetch('/api/sheets/deleteRow', {
+  const response = await fetch('https://spock-mauve.vercel.app/api/sheets/deleteRow', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -234,6 +231,7 @@ export const deleteDoc = async (sheetId,sheetName,docId) =>{
     body: JSON.stringify(postData),
   });
   
-  return response;
+  return response.ok;
 
 }
+

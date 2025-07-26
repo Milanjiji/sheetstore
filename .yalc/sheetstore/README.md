@@ -9,7 +9,7 @@ SheetStore is a lightweight JavaScript library that provides a Firestore-like AP
 
 - Familiar Firestore-like API (getDocs, getDoc, addDoc, etc.)
 - Use Google Sheets as your database
-- Free tier usage with Google Sheets
+- Free tier usage with Google Sheets API
 - No complex setup or authentication required (compared to Firestore)
 - Simple document-based data structure
 - Minimal dependencies
@@ -33,10 +33,7 @@ yarn add sheetstore
 1. Go to [Google Sheets](https://sheets.google.com) and create a new spreadsheet
 2. Name your spreadsheet (e.g., "MyAppDatabase")
 3. Create worksheets for your collections (e.g., "users", "posts")
-4. Share the sheet with the service account email:
-   - Email: `spock-707@spock-32d7d.iam.gserviceaccount.com`
-   - Permission: Editor
-5. Make sure your Google Sheet is shared with the appropriate permissions:
+4. Make sure your Google Sheet is shared with the appropriate permissions:
    - For development: "Anyone with the link can edit"
    - For production: Use a service account with Google Sheets API
 
@@ -46,6 +43,59 @@ The Sheet ID is the long string in your Google Sheet URL:
 ```
 https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=0
 ```
+
+### 3. Set Up API Routes
+
+SheetStore requires API routes to interact with Google Sheets. Create the following API endpoints in your application:
+
+#### API Routes to Implement
+
+| Endpoint | Purpose |
+|----------|---------|
+| `/api/sheets/get` | Get all documents |
+| `/api/sheets/getWithId` | Get document by ID |
+| `/api/sheets/add` | Add or update document |
+| `/api/sheets/clear` | Clear document (for setDoc) |
+| `/api/sheets/deleteRow` | Delete document |
+
+You'll need to implement these endpoints using the Google Sheets API. Here's a sample implementation using Next.js API routes (you can adapt this for other frameworks):
+
+<details>
+<summary>Sample API Implementation (Next.js)</summary>
+
+```javascript
+// pages/api/sheets/get.js
+import { google } from 'googleapis';
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
+  try {
+    const { sheetId, sheetName } = req.body;
+    
+    // Initialize the Sheets API (you'll need to set up authentication)
+    const sheets = google.sheets({ version: 'v4', auth: /* your auth here */ });
+    
+    // Get the data from the sheet
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetId,
+      range: `${sheetName}!A:Z`,
+    });
+    
+    const rows = response.data.values || [];
+    
+    return res.status(200).json({ data: rows });
+  } catch (error) {
+    console.error('Error accessing Google Sheets:', error);
+    return res.status(500).json({ message: 'Error fetching data' });
+  }
+}
+```
+
+Similar implementations would be needed for the other endpoints.
+</details>
 
 ## 📖 Usage Examples
 
@@ -173,9 +223,29 @@ Example Sheet Structure:
 |--------------|---------------|------------------------|--------|
 | docId:def456 | name:Jane Smith | email:jane@example.com | age:25 |
 
+## 🔄 Comparison with Firebase Firestore
+
+| Feature | SheetStore | Firestore |
+|---------|------------|-----------|
+| Cost | Free (with Google Sheets) | Free tier limited, then paid |
+| Setup | Simple | Complex |
+| Authentication | Optional | Required |
+| Real-time Updates | No | Yes |
+| Complex Queries | Limited | Extensive |
+| Scalability | Limited | High |
+| Offline Support | No | Yes |
+| Transactions | No | Yes |
+| Best For | Small projects, prototypes | Production apps, complex data |
+
 ## 🤝 Contributing
 
-Contributions are welcome! Whether you're reporting bugs, suggesting features, or submitting code, your help is greatly appreciated. Feel free to open issues or submit pull requests.
+Contributions are welcome! Here's how you can help:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add some amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
 ## 📝 License
 
@@ -185,3 +255,5 @@ This project is licensed under the ISC License - see the LICENSE file for detail
 
 - Inspired by Firebase Firestore
 - Built with Google Sheets API
+- Developed by [Milanjiji](https://github.com/Milanjiji)
+

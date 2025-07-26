@@ -440,7 +440,7 @@ var GetRowIndexWithId = /*#__PURE__*/function () {
             "docId": docId
           };
           _context.next = 3;
-          return fetch('/api/sheets/getWithId', {
+          return fetch('https://spock-mauve.vercel.app/api/sheets/getWithId', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -484,7 +484,7 @@ var getDocs = /*#__PURE__*/function () {
           };
           console.log("fething data");
           _context2.next = 4;
-          return fetch('/api/sheets/get', {
+          return fetch('https://spock-mauve.vercel.app/api/sheets/get', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -538,7 +538,7 @@ var getDoc = /*#__PURE__*/function () {
             "docId": docId
           };
           _context3.next = 3;
-          return fetch('/api/sheets/getWithId', {
+          return fetch('https://spock-mauve.vercel.app/api/sheets/getWithId', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -612,7 +612,7 @@ var addDoc = /*#__PURE__*/function () {
             sheetId: sheetId
           };
           _context4.next = 15;
-          return fetch('/api/sheets/add', {
+          return fetch('https://spock-mauve.vercel.app/api/sheets/add', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -667,7 +667,7 @@ var updateDoc = /*#__PURE__*/function () {
             sheetId: sheetId
           };
           _context5.next = 15;
-          return fetch('/api/sheets/add', {
+          return fetch('https://spock-mauve.vercel.app/api/sheets/add', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -704,7 +704,7 @@ var setDoc = /*#__PURE__*/function () {
           rowNumber = lastRowNo.index + 1;
           clearRange = "".concat(sheetName, "!A").concat(rowNumber, ":Z").concat(rowNumber);
           _context6.next = 10;
-          return fetch('/api/sheets/clear', {
+          return fetch('https://spock-mauve.vercel.app/api/sheets/clear', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -773,7 +773,7 @@ var deleteDoc = /*#__PURE__*/function () {
             index: RowNo.index + 1
           };
           _context7.next = 6;
-          return fetch('/api/sheets/deleteRow', {
+          return fetch('https://spock-mauve.vercel.app/api/sheets/deleteRow', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
