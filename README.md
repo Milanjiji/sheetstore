@@ -3,6 +3,10 @@
 [![npm version](https://img.shields.io/npm/v/sheetstore.svg)](https://www.npmjs.com/package/sheetstore)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
+## 🚀 Try It Live
+
+Try SheetStore right now with our live demo at [https://spock-mauve.vercel.app/](https://spock-mauve.vercel.app/)
+
 SheetStore is a lightweight JavaScript library that provides a Firestore-like API for storing and retrieving data using Google Sheets as your backend database. It's perfect for small to medium-sized projects where you want a simple, cost-effective alternative to Firebase Firestore.
 
 ## 🚀 Features

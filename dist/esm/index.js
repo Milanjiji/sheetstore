@@ -621,7 +621,7 @@ var addDoc = /*#__PURE__*/function () {
           });
         case 15:
           response = _context4.sent;
-          return _context4.abrupt("return", response);
+          return _context4.abrupt("return", response.ok);
         case 17:
         case "end":
           return _context4.stop();
@@ -659,14 +659,13 @@ var updateDoc = /*#__PURE__*/function () {
               value = _ref9[1];
             return "".concat(key, ":").concat(value);
           }))];
-          Range = "".concat(sheetName, "!A").concat(lastRowNo.index + 1, ":").concat(numbertoString).concat(lastRowNo.index + 1);
-          console.log(lastRowNo.index, Object.keys(data).length, transformedValues, Range, "data from setDoc");
+          Range = "".concat(sheetName, "!A").concat(lastRowNo.index + 1, ":").concat(numbertoString).concat(lastRowNo.index + 1); // console.log(lastRowNo.index,Object.keys(data).length,transformedValues,Range,"data from setDoc")
           postData = {
             values: transformedValues,
             range: Range,
             sheetId: sheetId
           };
-          _context5.next = 15;
+          _context5.next = 14;
           return fetch('https://spock-mauve.vercel.app/api/sheets/add', {
             method: 'POST',
             headers: {
@@ -674,10 +673,10 @@ var updateDoc = /*#__PURE__*/function () {
             },
             body: JSON.stringify(postData)
           });
-        case 15:
+        case 14:
           response = _context5.sent;
-          return _context5.abrupt("return", response);
-        case 17:
+          return _context5.abrupt("return", response.ok);
+        case 16:
         case "end":
           return _context5.stop();
       }
@@ -782,7 +781,7 @@ var deleteDoc = /*#__PURE__*/function () {
           });
         case 6:
           response = _context7.sent;
-          return _context7.abrupt("return", response);
+          return _context7.abrupt("return", response.ok);
         case 8:
         case "end":
           return _context7.stop();

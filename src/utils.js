@@ -161,6 +161,30 @@ export const updateDoc = async (sheetId,sheetName,docId,update) =>{
 
 }
 
+
+
+export const deleteDoc = async (sheetId,sheetName,docId) =>{
+
+  const RowNo = await GetRowIndexWithId(sheetId,sheetName,docId);
+
+  const postData = {
+    sheetId: sheetId,
+    sheetName:sheetName,
+    index:RowNo.index+1
+  };
+
+  const response = await fetch('https://spock-mauve.vercel.app/api/sheets/deleteRow', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(postData),
+  });
+  
+  return response.ok;
+
+}
+
 export const setDoc = async (sheetId,sheetName,docId,update) =>{
 
   var data = await getDoc(sheetId,sheetName,docId);
@@ -212,26 +236,3 @@ export const setDoc = async (sheetId,sheetName,docId,update) =>{
   return response;
   
 }
-
-export const deleteDoc = async (sheetId,sheetName,docId) =>{
-
-  const RowNo = await GetRowIndexWithId(sheetId,sheetName,docId);
-
-  const postData = {
-    sheetId: sheetId,
-    sheetName:sheetName,
-    index:RowNo.index+1
-  };
-
-  const response = await fetch('https://spock-mauve.vercel.app/api/sheets/deleteRow', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(postData),
-  });
-  
-  return response.ok;
-
-}
-
